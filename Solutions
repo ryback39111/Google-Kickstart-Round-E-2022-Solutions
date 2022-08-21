@@ -1,0 +1,150 @@
+Coloring Game 
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    // printf("Hello World");
+    int t;cin>>t;
+    for(int i=1;i<=t;i++){
+        int n;
+        cin>>n;
+        int ans = (n+5-1)/5;
+
+        cout << "Case #" << i << ": " << ans << "\n";
+    }
+    return 0;
+}
+
+
+
+Students and Mentors
+
+
+
+#include <bits/stdc++.h> 
+using namespace std; 
+int32_t main() 
+{ 
+    ios::sync_with_stdio(0);  
+    cin.tie(0);  
+    cout.tie(0); 
+     
+    int t; 
+    cin>>t; 
+    for (int q = 0; q < t; q++) 
+    { 
+        cout<<"Case #"<<q+1<<":"<<" "; 
+        int n; 
+        cin>>n; int arr[n]; int brr[n]; 
+        for (int i = 0; i < n; i++)            cin>>arr[i]; 
+        for (int i = 0; i < n; i++)  brr[i]=arr[i]; 
+        sort(brr,brr+n); 
+        for (int i = 0; i < n; ++i) 
+        {   auto yoman=upper_bound(brr,brr+n,arr[i]*2)-brr; yoman--; 
+            if(brr[yoman]==arr[i]) yoman--;if(yoman>=0) cout<<brr[yoman]<<" "; 
+            else cout<<"-1"<<" "; 
+        }  
+        cout<<endl; 
+         
+    } 
+     
+    return 0; 
+}
+
+
+
+
+
+Matching Palindrome
+
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int N, x, y, i;
+    long long int tip = 0;
+    int arr1[101000], arr2[101000];
+
+    scanf("%d%d%d", &N, &x, &y);
+    for(i = 0; i<N; i++) {
+        scanf("%d", &arr1[i]);
+    }
+    for(i = 0; i<N; i++) {
+        scanf("%d", &arr2[i]);
+    }
+    for(i = 0; i < N; i++) {
+        arr2[i] = arr2[i] - arr1[i];
+    }
+    sort(arr2, arr2+N);
+
+    for(i = 0; i < N; i++) {
+        if(((y>0)&&(arr2[i]>0)) || (x==0)) {
+            tip += arr1[i] + arr2[i];
+            y--;
+        }
+        else {
+            tip += arr1[i];
+            x--;
+        }
+    }
+
+    printf("Case" ,"%lld\n", tip);
+
+    return 0;
+}
+
+
+
+
+
+Pizza Delivery
+
+
+
+from collections import defaultdict 
+
+for t in range(int(input())): 
+    ans = 0 
+    n, p, m, startr, startc = map(int, input().split()) 
+    inp = [input() for j in range(4)] 
+    booth = [] 
+    directions = [[-1, 0], [0, 1], [0, -1], [1, 0]] 
+    for d in inp: 
+        d = d.split() 
+        booth.append((d[0], int(d[1]))) 
+     
+    cust = {} 
+    for _ in range(p): 
+        inp = list(map(int, input().split())) 
+        cust[(inp[0], inp[1])] = inp[2] 
+
+    best = defaultdict(lambda: -float("inf")) 
+    last = [(startr, startc, 0)] 
+    best[(startr, startc)] = 0 
+
+    for _ in range(m): 
+        cur = [] 
+        for row, col, coin in last: 
+            for k in range(4): 
+                x, y = row + directions[k][0], col + directions[k][1] 
+                newcost = coin 
+                 
+                if booth[k][0] == '+': 
+                    newcost = coin + booth[k][1] 
+                elif booth[k][0] == '-': 
+                    newcost = coin - booth[k][1] 
+                elif booth[k][0] == '*': 
+                    newcost = coin * booth[k][1] 
+                elif booth[k][0] == '/': 
+                    newcost = coin // booth[k][1] 
+                 
+                if 0 < x <= n and 0 < y <= n and newcost > best[(x, y)]: 
+                    best[(x, y)] = newcost 
+                    ans = max(ans, newcost) 
+                    cur.append((x, y, newcost)) 
+        last = cur 
+
+    print(f"Case #{t+1}: {ans}")
